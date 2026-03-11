@@ -1,48 +1,62 @@
-# EX-NO-9-RSA-Algorithm
+# EX-NO-7-Implement-DES-Encryption
+# reg no: 212224040078
+# Name: S DINESH RAGHAVENDARA
+## Aim:
 
-## AIM:
-To Implement RSA Encryption Algorithm in Cryptography
+To use the Data Encryption Standard (DES) algorithm for a practical application, such as securing sensitive data transmission in financial transactions.
 
-## Algorithm:
+## ALGORITHM:
 
-
-Step 1: Design of RSA Algorithm  
-The RSA algorithm is based on the mathematical difficulty of factoring the product of two large prime numbers. It involves generating a public and private key pair, where the public key is used for encryption, and the private key is used for decryption.
-
-Step 2: Implementation in Python or C 
-This algorithm can be implemented in languages like Python or C by performing large integer calculations for key generation, encryption, and decryption, utilizing libraries for modular arithmetic if necessary.
-
-Step 3: Algorithm Description  
-1. Key Generation:
-   - Select two large prime numbers \( p \) and \( q \).
-   - Calculate \( n = p \times q \), which will be used as the modulus.
-   - Compute the totient \( \phi(n) = (p - 1)(q - 1) \).
-   - Choose a public exponent \( e \) such that \( e \) is coprime with \( \phi(n) \).
-   - Compute the private key \( d \), which is the modular inverse of \( e \) mod \( \phi(n) \).
-
-2. Encryption:
-   - Convert the plaintext message \( M \) into a numerical form \( m \) (such that \( 0 \le m < n \)).
-   - Compute the ciphertext \( c \) using the formula: \( c = m^e \mod n \).
-
-3. Decryption:
-   - Use the private key \( d \) to recover \( m \) from \( c \) using: \( m = c^d \mod n \).
-   - Convert \( m \) back into the original message \( M \).
-
-Step 4: Mathematical Representation  
-- Encryption: \( E(m) = m^e \mod n \)
-- Decryption: \( D(c) = c^d \mod n \)
-
-Step 5: **Security Foundation  
-The security of RSA relies on the difficulty of factoring large numbers; thus, choosing sufficiently large prime numbers for \( p \) and \( q \) is crucial for security.
+1. DES is based on a symmetric key encryption technique that encrypts data in 64-bit blocks.
+2. DES uses a Feistel network structure with 16 rounds of processing for encryption.
+3. DES has a 64-bit key, but only 56 bits are used for encryption (the remaining 8 bits are for parity).
+4. DES applies initial and final permutations along with 16 rounds of substitution and permutation transformations to produce ciphertext.
 
 ## Program:
-
+```
+#include <stdio.h> 
+#include <string.h> 
+ 
+void xorCrypt(char *in, char *key, char *out, int len) { 
+    for (int i = 0; i < len; i++) { 
+        out[i] = in[i] ^ key[i % strlen(key)]; 
+    } 
+    out[len] = '\0'; 
+} 
+int main() { 
+    char msg[100], key[100], enc[100], dec[100]; 
+ 
+    printf ("Enter message: "); 
+    fgets(msg, 100, stdin); 
+    msg[strcspn(msg, "\n")] = 0; 
+ 
+    printf ("Enter key: "); 
+    fgets(key, 100, stdin); 
+    key[strcspn(key, "\n")] = 0; 
+ 
+    int len = strlen(msg); 
+ 
+    xorCrypt(msg, key, enc, len); 
+    printf ("Encrypted: "); 
+    for (int i = 0; i < len; i++) { 
+        printf ("%02X ", (unsigned char)enc[i]); 
+    } 
+    printf ("\n"); 
+ 
+    xorCrypt(enc, key, dec, len); 
+    printf ("Decrypted: %s\n", dec); 
+ 
+    return 0; 
+}
+```
 
 
 
 ## Output:
 
+<img width="1621" height="900" alt="image" src="https://github.com/user-attachments/assets/c6ae7e84-e411-4535-ad2d-045d7cf95749" />
 
 
 ## Result:
- The program is executed successfully.
+  The program is executed successfully
+
